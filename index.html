@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevTrack - Developer Progress Tracker</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-code"></i>
+            <h2>DevTrack</h2>
+        </div>
+<nav>
+
+    <a href="#dashboard">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="#goals">
+        <i class="fa-solid fa-list-check"></i>
+        Goals
+    </a>
+
+    <a href="#notes">
+        <i class="fa-solid fa-book"></i>
+        Notes
+    </a>
+
+    <a href="#analytics">
+        <i class="fa-solid fa-chart-line"></i>
+        Analytics
+    </a>
+
+    <a href="#dashboard">
+        <i class="fa-solid fa-gear"></i>
+        Settings
+    </a>
+
+</nav>
+         
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div>
+                <h1>Developer Progress Tracker</h1>
+                <p>Track your learning journey every day.</p>
+            </div>
+
+            <button id="theme-btn">
+                🌙
+            </button>
+
+        </header>
+
+        <!-- Hero Card -->
+        <!-- Hero Card -->
+ <section id="dashboard" class="card hero-card"></section>
+
+    <h2 id="greeting">Good Morning 👋</h2>
+
+    <p id="today-date"></p>
+
+    <div class="quote-box">
+
+        <h3>💡 Today's Motivation</h3>
+
+        <p id="quote"></p>
+
+    </div>
+
+    <div class="streak-container">
+
+        <div class="streak-box">
+
+            🔥 Current Streak
+
+            <h3 id="streak-count">0 Days</h3>
+
+        </div>
+
+        <div class="streak-box">
+
+            🏆 Best Streak
+
+            <h3 id="best-streak">0 Days</h3>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- Dashboard Statistics -->
+<section class="stats-grid">
+
+    <div class="stats-card">
+
+        <h3 id="stats-total">0</h3>
+
+        <p>📚 Total Goals</p>
+
+    </div>
+
+    <div class="stats-card">
+
+        <h3 id="stats-completed">0</h3>
+
+        <p>✅ Completed</p>
+
+    </div>
+
+    <div class="stats-card">
+
+        <h3 id="stats-pending">0</h3>
+
+        <p>⏳ Pending</p>
+
+    </div>
+
+    <div class="stats-card">
+
+        <h3 id="stats-high">0</h3>
+
+        <p>🔥 High Priority</p>
+
+    </div>
+
+</section>
+
+        <!-- Progress Section -->
+        <section class="card">
+
+            <h2>Overall Progress</h2>
+
+            <div class="progress-bar">
+                <div id="overall-progress"></div>
+            </div>
+
+            <p id="progress-text">0% Completed</p>
+
+        </section>
+
+        <!-- Goals -->
+        <!-- Goals Section -->
+     <!-- Goals Section -->
+ <h2>Learning Goals</h2>
+
+    
+
+    <!-- Goal Form -->
+    <div class="goal-form">
+
+        <!-- Goal Name -->
+        <input
+            type="text"
+            id="goal-input"
+            placeholder="Enter your learning goal">
+
+        <!-- Category -->
+        <select id="goal-category">
+
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="DSA">DSA</option>
+            <option value="Database">Database</option>
+            <option value="DevOps">DevOps</option>
+            <option value="AI">AI</option>
+            <option value="Other">Other</option>
+
+        </select>
+
+        <!-- Priority -->
+        <select id="goal-priority">
+
+            <option value="High">🔥 High</option>
+            <option value="Medium">🟡 Medium</option>
+            <option value="Low">🟢 Low</option>
+
+        </select>
+
+        <!-- Target Date -->
+        <input
+            type="date"
+            id="goal-date">
+
+        <!-- Add Button -->
+        <button id="add-goal-btn">
+
+            Add Goal
+
+        </button>
+        <div class="goal-backup">
+
+    <button id="export-btn">
+        📤 Export Goals
+    </button>
+
+    <button id="import-btn">
+        📥 Import Goals
+    </button>
+
+    <input
+        type="file"
+        id="import-file"
+        accept=".json"
+        hidden>
+
+</div>
+
+    </div>
+
+    <!-- Search, Filter & Sort -->
+    <div class="goal-tools">
+
+        <!-- Search -->
+        <input
+            type="text"
+            id="search-goal"
+            placeholder="🔍 Search goals">
+
+        <!-- Filter -->
+        <select id="filter-category">
+
+            <option value="All">All Categories</option>
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="DSA">DSA</option>
+            <option value="Database">Database</option>
+            <option value="DevOps">DevOps</option>
+            <option value="AI">AI</option>
+            <option value="Other">Other</option>
+
+        </select>
+
+        <!-- Sort -->
+        <select id="sort-goals">
+
+            <option value="default">Sort By</option>
+            <option value="priority">Priority</option>
+            <option value="deadline">Deadline</option>
+            <option value="completed">Completed</option>
+
+        </select>
+
+    </div>
+
+    <!-- Goals List -->
+    <div id="goals-container">
+
+        <!-- Goals will be added dynamically -->
+
+    </div>
+
+</section>
+
+        <!-- Notes -->
+         <!-- Notes Section -->
+ <section id="notes" class="card notes-section"></section>
+
+    <h2>Today's Notes</h2>
+
+    <textarea
+        id="daily-notes"
+        placeholder="Write what you learned today...">
+    </textarea>
+
+    <div class="notes-actions">
+
+        <button id="save-notes-btn">
+            💾 Save Notes
+        </button>
+
+        <span id="last-saved">
+            Never Saved
+        </span>
+
+    </div>
+
+</section>
+
+        <!-- Analytics -->
+       <!-- Analytics Section -->
+<section id="analytics" class="card analytics-section"></section> 
+
+    <h2>Weekly Analytics</h2>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <h3 id="total-goals">0</h3>
+            <p>Total Goals</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3 id="completed-goals">0</h3>
+            <p>Completed</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3 id="pending-goals">0</h3>
+            <p>Pending</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3 id="completion-rate">0%</h3>
+            <p>Completion Rate</p>
+        </div>
+
+    </div>
+    <div class="chart-container">
+
+    <canvas id="progressChart"></canvas>
+
+</div>
+<div class="chart-container">
+
+    <canvas id="priorityChart"></canvas>
+
+</div>
+
+</section> 
+<footer class="footer">
+
+    <p>
+        © 2026 DevTrack • Built with ❤️ using HTML, CSS & JavaScript
+    </p>
+
+</footer>
+    </main>
+
+</div>
+<!-- Delete Confirmation Modal -->
+
+<div id="delete-modal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Delete Goal?</h2>
+
+        <p>Are you sure you want to delete this goal?</p>
+
+        <div class="modal-buttons">
+
+            <button id="cancel-delete">
+                Cancel
+            </button>
+
+            <button id="confirm-delete">
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/goals.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/notes.js"></script>
+<script src="js/streak.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/backup.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/app.js"></script>
+<!-- Toast Notification -->
+ <!-- Delete Confirmation Modal -->
+<div id="delete-modal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>⚠ Delete Goal</h2>
+
+        <p>Are you sure you want to delete this goal?</p>
+
+        <div class="modal-buttons">
+
+            <button id="cancel-delete">
+                Cancel
+            </button>
+
+            <button id="confirm-delete">
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="toast"></div>
+</body>
+</html>

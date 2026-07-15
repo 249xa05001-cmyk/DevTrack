@@ -1,0 +1,154 @@
+/* ==========================================
+   Fade In Animation
+========================================== */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+.fade-in {
+
+    animation: fadeIn 0.8s ease;
+}
+
+/* ==========================================
+   Slide Up Animation
+========================================== */
+
+@keyframes slideUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.card {
+
+    animation: slideUp 0.6s ease;
+}
+
+/* ==========================================
+   Button Animation
+========================================== */
+
+button {
+
+    transition: all 0.3s ease;
+}
+
+button:hover {
+
+    transform: translateY(-3px) scale(1.02);
+}
+
+button:active {
+
+    transform: scale(0.96);
+}
+
+/* ==========================================
+   Goal Card Animation
+========================================== */
+
+.goal-card {
+
+    transition: all 0.3s ease;
+}
+
+.goal-card:hover {
+
+    transform: translateY(-4px);
+}
+
+/* ==========================================
+   Progress Bar Animation
+========================================== */
+
+#overall-progress {
+
+    transition: width 0.8s ease-in-out;
+}
+
+/* ==========================================
+   Navigation Hover
+========================================== */
+
+.sidebar nav a {
+
+    transition: all 0.3s ease;
+}
+
+.sidebar nav a:hover {
+
+    padding-left: 22px;
+}
+
+/* ==========================================
+   Input Animation
+========================================== */
+
+input,
+textarea {
+
+    transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+
+    border-color: var(--primary-color);
+
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.2);
+}
+
+/* ==========================================
+   Theme Button Rotation
+========================================== */
+
+#theme-btn:hover {
+
+    transform: rotate(20deg);
+}
+
+/* ==========================================
+   Smooth Scrolling
+========================================== */
+
+html {
+
+    scroll-behavior: smooth;
+}
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}

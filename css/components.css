@@ -1,0 +1,868 @@
+/* =========================
+   Goal Card
+========================= */
+
+.goal-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding: 16px;
+    margin-bottom: 12px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--border-color);
+
+    transition: 0.3s ease;
+}
+
+.goal-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+}
+
+.goal-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex: 1;
+}
+
+.goal-left input[type="checkbox"] {
+
+    width: 18px;
+
+    height: 18px;
+
+    cursor: pointer;
+}
+
+.goal-title {
+
+    font-size: 16px;
+
+    font-weight: 500;
+}
+
+.completed {
+
+    text-decoration: line-through;
+
+    color: gray;
+}
+
+/* =========================
+   Delete Button
+========================= */
+
+.delete-btn {
+
+    background: var(--danger-color);
+
+    color: white;
+
+    padding: 8px 12px;
+
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+
+    background: #dc2626;
+}
+
+/* =========================
+   Progress Badge
+========================= */
+
+.progress-badge {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 50px;
+
+    background: #EEF2FF;
+
+    color: var(--primary-color);
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+/* =========================
+   Analytics Cards
+========================= */
+
+.analytics-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+
+    gap: 20px;
+}
+
+.analytics-card {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: var(--shadow);
+
+    transition: .3s;
+}
+
+.analytics-card:hover {
+
+    transform: translateY(-5px);
+}
+
+.analytics-card h3 {
+
+    font-size: 28px;
+
+    color: var(--primary-color);
+
+    margin-bottom: 10px;
+}
+
+.analytics-card p {
+
+    color: var(--secondary-text);
+}
+
+/* =========================
+   Empty State
+========================= */
+
+.empty-state {
+
+    text-align: center;
+
+    color: gray;
+
+    padding: 30px;
+}
+
+/* =========================
+   Small Buttons
+========================= */
+
+.small-btn {
+
+    padding: 8px 14px;
+
+    font-size: 14px;
+}
+/* ==========================================
+   Goal Form
+========================================== */
+
+.goal-form{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr 1fr auto;
+
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.goal-form select{
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border-color);
+
+    outline:none;
+
+    font-family:inherit;
+
+    background:white;
+}
+
+.goal-form button{
+
+    white-space:nowrap;
+}
+/* ==========================================
+   Notes
+========================================== */
+
+.notes-actions{
+
+    margin-top:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+#last-saved{
+
+    color:gray;
+
+    font-size:14px;
+}
+/* ==========================================
+   Toast
+========================================== */
+
+.toast{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+    background:#111827;
+
+    color:white;
+
+    padding:15px 22px;
+
+    border-radius:10px;
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    transition:.3s;
+
+    z-index:999;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+/* ==========================================
+   Goal Tools
+========================================== */
+
+.goal-tools{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.goal-tools select{
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border-color);
+
+    font-family:inherit;
+}
+/* ==========================================
+   Goal Actions
+========================================== */
+
+.goal-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.edit-btn{
+
+    background:#2563EB;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.edit-btn:hover{
+
+    background:#1D4ED8;
+}
+/* ==========================================
+   Dashboard Statistics
+========================================== */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+    margin:25px 0;
+
+}
+
+.stats-card{
+
+    background:var(--card-color);
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.stats-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.stats-card h3{
+
+    font-size:32px;
+
+    color:var(--primary-color);
+
+    margin-bottom:10px;
+
+}
+
+.stats-card p{
+
+    color:var(--secondary-text);
+
+    font-weight:500;
+
+}
+/* ==========================================
+   Toast Notification
+========================================== */
+
+#toast{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    background:#22C55E;
+
+    color:white;
+
+    padding:15px 22px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:translateY(-20px);
+
+    transition:.4s;
+
+    z-index:9999;
+
+}
+
+#toast.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+/* ==========================================
+   Delete Modal
+========================================== */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9998;
+
+}
+
+.modal.show{
+
+    display:flex;
+
+}
+
+.modal-content{
+
+    background:var(--card-color);
+
+    color:var(--text-color);
+
+    padding:30px;
+
+    border-radius:16px;
+
+    width:350px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+    animation:popup .3s ease;
+
+}
+
+.modal-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+#cancel-delete{
+
+    background:#6B7280;
+
+}
+
+#confirm-delete{
+
+    background:#EF4444;
+
+}
+
+#confirm-delete:hover{
+
+    background:#DC2626;
+
+}
+/* ==========================================
+   Deadline Status
+========================================== */
+
+.deadline-status{
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+/* ==========================================
+   Goal Card
+========================================== */
+
+.goal-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    background:var(--card-color);
+
+    margin-bottom:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.goal-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.goal-left{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:flex-start;
+
+}
+
+.goal-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.goal-meta{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+/* ==========================================
+   Priority Badge
+========================================== */
+
+.priority-badge{
+
+    padding:4px 12px;
+
+    border-radius:30px;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.priority-badge.high{
+
+    background:#EF4444;
+
+}
+
+.priority-badge.medium{
+
+    background:#F59E0B;
+
+}
+
+.priority-badge.low{
+
+    background:#22C55E;
+
+}
+/* ==========================================
+   Goal Buttons
+========================================== */
+
+.goal-actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.edit-btn{
+
+    background:#2563EB;
+
+}
+
+.edit-btn:hover{
+
+    background:#1D4ED8;
+
+}
+
+.delete-btn{
+
+    background:#EF4444;
+
+}
+
+.delete-btn:hover{
+
+    background:#DC2626;
+
+}
+/* ==========================================
+   Chart
+========================================== */
+
+.chart-container{
+
+    margin-top:30px;
+
+    background:var(--card-color);
+
+    border-radius:15px;
+
+    padding:20px;
+
+    height:350px;
+
+}
+/* ===========================
+   Overdue Goal
+=========================== */
+
+.goal-card.overdue{
+    border-left:5px solid #ff4d4f;
+    background:#fff5f5;
+}
+
+.overdue-text{
+    color:#ff4d4f;
+    font-weight:700;
+    margin-top:8px;
+}
+/* ===== Goal Meta ===== */
+
+.goal-meta{
+    display:flex;
+    gap:10px;
+    margin:10px 0;
+}
+
+.category,
+.priority{
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    color:white;
+}
+
+/* Categories */
+
+.frontend{background:#3498db;}
+.backend{background:#2ecc71;}
+.dsa{background:#9b59b6;}
+.database{background:#f39c12;}
+.devops{background:#34495e;}
+.ai{background:#e74c3c;}
+.other{background:#7f8c8d;}
+
+/* Priority */
+
+.high{background:#e74c3c;}
+.medium{background:#f39c12;}
+.low{background:#2ecc71;}
+
+/* Overdue */
+
+.goal-card.overdue{
+    border-left:5px solid #e74c3c;
+}
+
+.overdue-text{
+    color:#e74c3c;
+    font-weight:bold;
+}
+/* ==========================================
+   Quote Box
+========================================== */
+
+.quote-box{
+
+    margin:20px 0;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    background:#EEF2FF;
+
+}
+
+.quote-box h3{
+
+    margin-bottom:10px;
+
+}
+
+body.dark .quote-box{
+
+    background:#374151;
+
+}
+/* ==========================================
+   Backup Buttons
+========================================== */
+
+.goal-backup{
+
+    display:flex;
+
+    gap:15px;
+
+    margin:20px 0;
+
+    flex-wrap:wrap;
+
+}
+/* ==========================================
+   Empty State
+========================================== */
+
+.empty-state{
+
+    padding:50px;
+
+    text-align:center;
+
+    border:2px dashed var(--border-color);
+
+    border-radius:15px;
+
+    color:var(--secondary-text);
+
+    background:var(--card-color);
+
+}
+
+.empty-state h2{
+
+    margin-bottom:10px;
+
+}
+
+.empty-state p{
+
+    margin:0;
+
+}
+/* ==========================================
+   Footer
+========================================== */
+
+.footer{
+
+    text-align:center;
+
+    padding:20px;
+
+    color:var(--secondary-text);
+
+    font-size:14px;
+
+}
+.card{
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+}
+/* ==========================================
+   Delete Modal
+========================================== */
+
+.modal{
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.6);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 1000;
+
+}
+
+.modal.show{
+
+    display: flex;
+
+}
+
+.modal-content{
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    width: 350px;
+
+}
+
+.modal-buttons{
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+}
