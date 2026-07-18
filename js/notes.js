@@ -1,4 +1,4 @@
- /* ==========================================
+  /* ==========================================
    DOM Elements
 ========================================== */
 
@@ -36,7 +36,10 @@ function saveDailyNotes() {
     const notes = notesArea.value;
 
     saveNotes(notes);
-    showToast("💾 Notes Saved");
+
+    // Update study streak only once per day
+    updateStudyStreak();
+
     const time = new Date().toLocaleString();
 
     saveData("notes_last_saved", time);
@@ -44,7 +47,7 @@ function saveDailyNotes() {
     lastSaved.textContent =
         "Last Saved : " + time;
 
-     
+    showToast("💾 Notes Saved Successfully");
 
 }
 
@@ -54,7 +57,7 @@ function saveDailyNotes() {
 
 let autoSaveTimer;
 
- if (notesArea) {
+if (notesArea) {
 
     notesArea.addEventListener("input", function () {
 
@@ -70,14 +73,12 @@ let autoSaveTimer;
 
 }
 
+/* ==========================================
+   Save Button
+========================================== */
+
 if (saveNotesBtn) {
 
     saveNotesBtn.addEventListener("click", saveDailyNotes);
 
 }
-
-/* ==========================================
-   Save Button
-========================================== */
-
-  
