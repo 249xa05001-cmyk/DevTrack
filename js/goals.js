@@ -53,14 +53,13 @@ function initializeGoals() {
 /* ==========================================
    Add / Update Goal
 ========================================== */
-function addGoal() {
+ function addGoal() {
 
     const title = goalInput.value.trim();
 
     if (title === "") {
 
         alert("Enter a goal.");
-
         return;
 
     }
@@ -81,7 +80,6 @@ function addGoal() {
         }
 
         editingGoalId = null;
-
         addGoalBtn.textContent = "Add Goal";
 
     }
@@ -108,8 +106,15 @@ function addGoal() {
 
     saveGoals(goals);
 
+    // Increase streak ONLY when adding a new goal
+    if (!isEditing) {
+
+        updateStudyStreak();
+
+    }
+
     showNotification(
-        "✅ Goal Added",
+        isEditing ? "✏️ Goal Updated" : "✅ Goal Added",
         title
     );
 
@@ -117,20 +122,13 @@ function addGoal() {
 
     clearGoalForm();
 
-    if (isEditing) {
-
-        showToast("✏️ Goal Updated Successfully");
-
-    }
-
-    else {
-
-        showToast("✅ Goal Added Successfully");
-
-    }
+    showToast(
+        isEditing
+            ? "✏️ Goal Updated Successfully"
+            : "✅ Goal Added Successfully"
+    );
 
 }
-
 /* ==========================================
    Clear Form
 ========================================== */
@@ -451,7 +449,7 @@ function addGoalEvents() {
    Toggle Goal
 ========================================== */
 
-function toggleGoal(id) {
+ function toggleGoal(id) {
 
     goals = goals.map(goal => {
 
@@ -460,6 +458,8 @@ function toggleGoal(id) {
             goal.completed = !goal.completed;
 
             if (goal.completed) {
+
+                updateStudyStreak();
 
                 showNotification(
                     "🎉 Goal Completed",
@@ -479,7 +479,6 @@ function toggleGoal(id) {
     renderGoals();
 
 }
-
 /* ==========================================
    Delete Goal
 ========================================== */
