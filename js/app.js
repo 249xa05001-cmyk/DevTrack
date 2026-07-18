@@ -11,4 +11,4 @@
     initializeAnalytics();
     initializeDashboard();
     initializeNotifications();
-});
+}); 
