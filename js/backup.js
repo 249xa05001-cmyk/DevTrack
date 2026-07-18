@@ -56,6 +56,43 @@ function exportGoals() {
 }
 
 /* ==========================================
+   Sanitize Imported Goal
+========================================== */
+
+/*
+   An imported file can contain objects missing fields
+   (category, priority, etc). Without this, renderGoals()
+   later crashes on goal.category.toLowerCase() and the
+   ENTIRE goal list silently disappears, not just the bad
+   entry. Every field gets a safe fallback here instead.
+*/
+function sanitizeGoal(goal) {
+
+    return {
+
+        id: typeof goal.id === "number" ? goal.id : generateId(),
+
+        title: typeof goal.title === "string" && goal.title.trim() !== ""
+            ? goal.title
+            : "Untitled Goal",
+
+        category: typeof goal.category === "string" && goal.category.trim() !== ""
+            ? goal.category
+            : "Other",
+
+        priority: ["High", "Medium", "Low"].includes(goal.priority)
+            ? goal.priority
+            : "Medium",
+
+        targetDate: typeof goal.targetDate === "string" ? goal.targetDate : "",
+
+        completed: !!goal.completed
+
+    };
+
+}
+
+/* ==========================================
    Import Goals
 ========================================== */
 
@@ -77,7 +114,7 @@ function importGoals() {
                 throw new Error("Invalid File");
             }
 
-            goals = importedGoals;
+            goals = importedGoals.map(sanitizeGoal);
 
             saveGoals(goals);
 
@@ -93,6 +130,16 @@ function importGoals() {
 
     };
 
+    reader.onerror = function () {
+
+        alert("Could not read the selected file.");
+
+    };
+
     reader.readAsText(file);
 
+    /* Reset so re-selecting the same file still fires "change" */
+    importFile.value = "";
+
 }
+ 
