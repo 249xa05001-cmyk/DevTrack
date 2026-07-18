@@ -1,4 +1,4 @@
- /* ==========================================
+   /* ==========================================
    Goals Data
 ========================================== */
 
@@ -29,14 +29,15 @@ const confirmDeleteBtn = document.getElementById("confirm-delete");
 const cancelDeleteBtn = document.getElementById("cancel-delete");
 
 let goalToDelete = null;
+
 /* ==========================================
    Variables
 ========================================== */
 
 let goals = loadGoals();
 
-/* ⭐ Add this here */
 let editingGoalId = null;
+
 /* ==========================================
    Initialize Goals
 ========================================== */
@@ -50,12 +51,9 @@ function initializeGoals() {
 }
 
 /* ==========================================
-   Add Goal
-========================================== */
- /* ==========================================
    Add / Update Goal
 ========================================== */
- function addGoal() {
+function addGoal() {
 
     const title = goalInput.value.trim();
 
@@ -92,7 +90,7 @@ function initializeGoals() {
 
         goals.push({
 
-            id: Date.now(),
+            id: generateId(),
 
             title,
 
@@ -109,10 +107,12 @@ function initializeGoals() {
     }
 
     saveGoals(goals);
+
     showNotification(
-    "✅ Goal Added",
-    title
-);
+        "✅ Goal Added",
+        title
+    );
+
     renderGoals();
 
     clearGoalForm();
@@ -149,6 +149,30 @@ function clearGoalForm() {
     addGoalBtn.textContent = "Add Goal";
 
 }
+
+/* ==========================================
+   Timezone-Safe Date Parsing
+========================================== */
+
+/*
+   new Date("YYYY-MM-DD") parses as UTC midnight. Calling
+   .setHours(0,0,0,0) on that later re-anchors it to LOCAL
+   midnight, which silently shifts the date back one day in
+   any timezone behind UTC. Parsing the parts manually avoids
+   that off-by-one entirely.
+*/
+function parseLocalDate(dateString) {
+
+    if (!dateString) {
+        return null;
+    }
+
+    const [year, month, day] = dateString.split("-").map(Number);
+
+    return new Date(year, month - 1, day);
+
+}
+
 /* ==========================================
    Deadline Status
 ========================================== */
@@ -165,9 +189,7 @@ function getDeadlineStatus(date) {
 
     today.setHours(0, 0, 0, 0);
 
-    const deadline = new Date(date);
-
-    deadline.setHours(0, 0, 0, 0);
+    const deadline = parseLocalDate(date);
 
     const diff = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
 
@@ -185,9 +207,9 @@ function getDeadlineStatus(date) {
 
     return `🔴 Overdue by ${Math.abs(diff)} day${Math.abs(diff) > 1 ? "s" : ""}`;
 
-} 
+}
 
- 
+
 
 function renderGoals() {
 
@@ -249,7 +271,7 @@ function renderGoals() {
             if (!a.targetDate) return 1;
             if (!b.targetDate) return -1;
 
-            return new Date(a.targetDate) - new Date(b.targetDate);
+            return parseLocalDate(a.targetDate) - parseLocalDate(b.targetDate);
 
         });
 
@@ -265,47 +287,55 @@ function renderGoals() {
        Empty State
     ========================== */
 
-     if (filteredGoals.length === 0) {
+    if (filteredGoals.length === 0) {
 
-    goalsContainer.innerHTML = `
-        <div class="empty-state">
+        goalsContainer.innerHTML = `
+            <div class="empty-state">
 
-            <h2>🎯 No Goals Yet</h2>
+                <h2>🎯 No Goals Yet</h2>
 
-            <p>
-                Add your first learning goal and start tracking your progress.
-            </p>
+                <p>
+                    Add your first learning goal and start tracking your progress.
+                </p>
 
-        </div>
-    `;
+            </div>
+        `;
 
-    updateProgress();
-    updateAnalytics();
+        updateProgress();
+        updateAnalytics();
+        updateDashboardStats();
 
-    return;
+        return;
 
-}
+    }
 
     /* ==========================
        Render Cards
     ========================== */
 
     filteredGoals.forEach(goal => {
+
         const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-const deadline = goal.targetDate
-    ? new Date(goal.targetDate)
-    : null;
+        const deadline = goal.targetDate
+            ? parseLocalDate(goal.targetDate)
+            : null;
 
-const isOverdue =
-    deadline &&
-    deadline < today &&
-    !goal.completed;
+        const isOverdue =
+            deadline &&
+            deadline < today &&
+            !goal.completed;
+
+        /* Defensive fallbacks in case of malformed/imported data */
+        const category = goal.category || "Other";
+        const priority = goal.priority || "Medium";
+
         const card = document.createElement("div");
 
-         card.className = isOverdue
-    ? "goal-card overdue"
-    : "goal-card";
+        card.className = isOverdue
+            ? "goal-card overdue"
+            : "goal-card";
 
         card.innerHTML = `
 
@@ -325,12 +355,12 @@ const isOverdue =
 
         <div class="goal-meta">
 
-            <span class="category ${goal.category.toLowerCase()}">
-                ${goal.category}
+            <span class="category ${category.toLowerCase()}">
+                ${category}
             </span>
 
-            <span class="priority ${goal.priority.toLowerCase()}">
-                ${goal.priority}
+            <span class="priority ${priority.toLowerCase()}">
+                ${priority}
             </span>
 
         </div>
@@ -374,14 +404,16 @@ const isOverdue =
     updateProgress();
 
     updateAnalytics();
-     updateDashboardStats();
+
+    updateDashboardStats();
+
 }
 
 /* ==========================================
    Add Events
 ========================================== */
 
- function addGoalEvents() {
+function addGoalEvents() {
 
     document.querySelectorAll(".goal-checkbox").forEach(box => {
 
@@ -402,15 +434,16 @@ const isOverdue =
         });
 
     });
+
     document.querySelectorAll(".edit-btn").forEach(button => {
 
-    button.addEventListener("click", function () {
+        button.addEventListener("click", function () {
 
-        editGoal(Number(this.dataset.id));
+            editGoal(Number(this.dataset.id));
+
+        });
 
     });
-
-});
 
 }
 
@@ -426,14 +459,14 @@ function toggleGoal(id) {
 
             goal.completed = !goal.completed;
 
-if (goal.completed) {
+            if (goal.completed) {
 
-    showNotification(
-        "🎉 Goal Completed",
-        goal.title
-    );
+                showNotification(
+                    "🎉 Goal Completed",
+                    goal.title
+                );
 
-}
+            }
 
         }
 
@@ -450,12 +483,6 @@ if (goal.completed) {
 /* ==========================================
    Delete Goal
 ========================================== */
- /* ==========================================
-   Delete Goal
-========================================== */
-/* ==========================================
-   Delete Goal
-========================================== */
 
 function deleteGoal(id) {
 
@@ -464,12 +491,12 @@ function deleteGoal(id) {
     deleteModal.classList.add("show");
 
 }
-  
- /* ==========================================
+
+/* ==========================================
    Edit Goal
 ========================================== */
 
- function editGoal(id) {
+function editGoal(id) {
 
     const goal = goals.find(g => g.id === id);
 
@@ -477,11 +504,11 @@ function deleteGoal(id) {
 
     goalInput.value = goal.title;
 
-    goalCategory.value = goal.category;
+    goalCategory.value = goal.category || "Other";
 
-    goalPriority.value = goal.priority;
+    goalPriority.value = goal.priority || "Medium";
 
-    goalDate.value = goal.targetDate;
+    goalDate.value = goal.targetDate || "";
 
     editingGoalId = id;
 
@@ -490,6 +517,7 @@ function deleteGoal(id) {
     goalInput.focus();
 
 }
+
 /* ==========================================
    Events
 ========================================== */
@@ -505,6 +533,7 @@ goalInput.addEventListener("keydown", function (event) {
     }
 
 });
+
 /* ==========================================
    Delete Modal Events
 ========================================== */
@@ -516,6 +545,7 @@ cancelDeleteBtn.addEventListener("click", function () {
     goalToDelete = null;
 
 });
+
 deleteModal.addEventListener("click", function (event) {
 
     if (event.target === deleteModal) {
@@ -527,6 +557,7 @@ deleteModal.addEventListener("click", function (event) {
     }
 
 });
+
 confirmDeleteBtn.addEventListener("click", function () {
 
     goals = goals.filter(goal => goal.id !== goalToDelete);
