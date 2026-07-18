@@ -1,4 +1,4 @@
-/* ==========================================
+  /* ==========================================
    Generate Unique ID
 ========================================== */
 
@@ -10,9 +10,17 @@ function generateId() {
    Get Today's Date
 ========================================== */
 
-function getTodayDate() {
+ function getTodayDate() {
 
-    return new Date().toISOString().split("T")[0];
+    const today = new Date();
+
+    const year = today.getFullYear();
+
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
 
 }
 
@@ -125,21 +133,7 @@ function showToast(message) {
    Toast Notification
 ========================================== */
 
-function showToast(message){
-
-    const toast=document.getElementById("toast");
-
-    toast.textContent=message;
-
-    toast.classList.add("show");
-
-    setTimeout(()=>{
-
-        toast.classList.remove("show");
-
-    },2500);
-
-}
+ 
 function getRemainingDays(date, completed){
 
     if(completed) return "✅ Completed";
