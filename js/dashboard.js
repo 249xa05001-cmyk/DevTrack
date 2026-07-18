@@ -1,4 +1,4 @@
-/* ==========================================
+ /* ==========================================
    Dashboard
 ========================================== */
 
@@ -68,4 +68,4 @@ function updateQuote(){
     document.getElementById("quote").textContent =
         quotes[random];
 
-}
+} 
